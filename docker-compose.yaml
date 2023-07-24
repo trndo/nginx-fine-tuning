@@ -1,0 +1,18 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 4510:80
+
+  media-nginx:
+    image: nginx:stable
+    ports:
+      - 8095:80
+    volumes:
+      - ./images:/var/www/html/images
+      - ./docker/media-nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./my_cache:/var/cache/nginx/my_cache
